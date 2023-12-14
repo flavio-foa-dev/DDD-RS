@@ -7,7 +7,7 @@ export class Question {
   public content: string
   public authorId: string
 
-  constructor(title: string, content: string, slug: string, authorId: string, id?: string, au) {
+  constructor(title: string, content: string, slug: string, authorId: string, id?: string) {
     this.title = title
     this.content = content
     this.slug = slug // value object tem regras de negocio associada a elas
