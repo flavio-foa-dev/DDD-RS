@@ -11,7 +11,7 @@ interface QuestionProps {
   content: string;
   slug: Slug  // value object tem regras de negocio associada a elas
   createdAt: Date;
-  updatedAt: Date;
+  updatedAt?: Date;
 }
 export class Question extends Entity<QuestionProps> {
 
@@ -77,7 +77,7 @@ export class Question extends Entity<QuestionProps> {
 
 
 
-  static create(props: Optional<QuestionProps, 'createdAt' | 'slug'>, id: UniqueEntityID) {
+  static create(props: Optional<QuestionProps, 'createdAt' | 'slug'>, id?: UniqueEntityID) {
     const question = new Question({
       ...props,
       slug: props.slug ?? Slug.createFromText(props.title),
