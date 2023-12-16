@@ -14,7 +14,7 @@ test('should create an answer', async ()=> {
 
   const answer = await answerQuestion.execute({
     instructorId: '1',
-    questionId: '2',
+    questionId: '1',
     content: 'New answer'
   });
 
