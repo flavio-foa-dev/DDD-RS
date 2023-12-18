@@ -1,22 +1,26 @@
-import { QuestionRepository } from '../repositories/questions-repository';
-import { Question } from '../../enterprise/entities/question';
+import { InMemoryQuestionsRepository } from 'test/repositories/in-memory-question-repositories';
 import { CreateQuestionUseCase } from './create-question';
 
-const fakeQuestionRepository: QuestionRepository = {
-  create: async (question: Question) => {
-    console.log(question);
-  }
-};
+let inMemoryQuestionsRepository: InMemoryQuestionsRepository;
+let sut: CreateQuestionUseCase;
 
-
-test('should create an question', async ()=> {
-  const createQuestion = new CreateQuestionUseCase(fakeQuestionRepository);
-
-  const {question} = await createQuestion.execute({
-    authorId: '1',
-    title: 'New Question',
-    content: 'New Question content',
+describe('CreateQuestion', () => {
+  beforeEach(() => {
+    inMemoryQuestionsRepository = new InMemoryQuestionsRepository();
+    sut = new CreateQuestionUseCase(inMemoryQuestionsRepository);
   });
 
-  expect(question.id).toBeTruthy();
+  it('should be able to create an question', async ()=> {
+    const {question} = await sut.execute({
+      authorId: '1',
+      title: 'New Question',
+      content: 'New Question content',
+    });
+
+    expect(question.id).toBeTruthy();
+    expect(inMemoryQuestionsRepository.items[0].id).toEqual(question.id);
+
+  });
+
 });
+
