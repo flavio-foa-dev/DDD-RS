@@ -1,11 +1,13 @@
 export class Slug {
   public value: string;
 
-  constructor(value: string) {
+  private constructor(value: string) {
     this.value = value;
   }
 
-
+  static create(text: string) {
+    return new Slug(text);
+  }
   /**
    * Receives a string and nomalize it as a slug
    *
